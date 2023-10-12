@@ -15,4 +15,3 @@ def minOperations(n: object) -> object:
             count += i
             n = n / i
     return count
-
