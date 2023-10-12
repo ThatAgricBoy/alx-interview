@@ -2,8 +2,11 @@
 """ Minimum Operations """
 
 
-def minOperations(n):
-    """ method that calculates the fewest number of operations needed """
+def minOperations(n: object) -> object:
+    """ method that calculates the fewest number of operations needed
+    @param n:
+    @return:
+    """
     if n <= 1:
         return 0
     count = 0
