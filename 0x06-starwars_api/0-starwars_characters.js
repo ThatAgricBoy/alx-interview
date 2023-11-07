@@ -6,15 +6,23 @@ request(url + movieId, function (error, response, body) {
   if (error) {
     console.log(error);
   } else {
-    const characters = JSON.parse(body).characters;
-    for (const character of characters) {
-      request(character, function (error, response, body) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(JSON.parse(body).name);
-        }
-      });
+    try {
+      const movieData = JSON.parse(body);
+      if (Array.isArray(movieData.characters)) {
+        movieData.characters.forEach((character) => {
+          request(character, function (error, response, body) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(JSON.parse(body).name);
+            }
+          });
+        });
+      } else {
+        console.log("No characters found in this movie.");
+      }
+    } catch (parseError) {
+      console.log("Error parsing JSON response:", parseError);
     }
   }
 });
